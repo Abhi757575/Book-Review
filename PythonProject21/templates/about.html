@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReviewNet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/style1.css">
+    <link rel="stylesheet" href="/static/about.css">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="shortcut icon" href="/static/assets/favicon.ico" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="/static/assets/favicon-32x32.png" alt="logo" id="logo-img">
+                <h1>ReviewNet</h1>
+            </div>
+            <div class="nav-links">
+                <div class="nav-links">
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('book') }}">Books</a></li>
+                    <li><a href="{{ url_for('cat') }}">Categories</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+                    <li><a href="{{ url_for('about') }}">About Us</a></li>
+                </ul>
+                </div>
+            </div>
+
+
+            <div class="user-actions">
+                {% if session.loggedin %}
+                <div class="user-welcome">Welcome, {{ session.username }}!</div>
+                <a href="{{ url_for('logout') }}" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                {% else %}
+                <a href="{{ url_for('login') }}" class="login-btn">Login</a>
+                <a href="{{ url_for('register') }}" class="register-btn">Register</a>
+                {% endif %}
+            </div>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </div>
+    </nav>
+    <section class="newsletter">
+
+        <div class="container">
+            <h1>About ReviewNet</h1>
+    
+            <p>Welcome to ReviewNet, a cozy corner of the internet dedicated to the wonderful world of books! We're more than just a review site; we're a community of passionate readers who believe in the power of stories to transport, enlighten, and connect us.</p>
+    
+            <div class="mission">
+                <h2>Our Mission</h2>
+                <p>Our mission is simple: to help you discover your next favorite read. We strive to provide honest, insightful, and engaging book reviews across a variety of genres. Whether you're a seasoned bookworm or just starting your literary journey, we aim to be your trusted guide in navigating the vast landscape of literature.</p>
+                <p>We believe that every book has a story to tell, and every reader deserves to find the stories that resonate with them. Through thoughtful analysis and heartfelt recommendations, we hope to spark your curiosity and fuel your love for reading.</p>
+            </div>
+    
+            
+            <h2>What We Offer</h2>
+            <ul>
+                <li><strong>Honest and In-depth Reviews:</strong> Our reviews go beyond simple plot summaries, delving into themes, writing style, character development, and overall impact.</li>
+                <li><strong>Diverse Genre Coverage:</strong> We aim to explore a wide range of genres, from contemporary fiction and thrillers to historical fiction, science fiction, fantasy, and non-fiction.</li>
+                <li><strong>Reader Engagement:</strong> We encourage discussion and interaction through comments sections and social media. Your thoughts and opinions matter!</li>
+                <li><strong>Recommendations and Lists:</strong> Discover new books through our curated lists, themed recommendations, and "if you liked this, try that" suggestions.</li>
+                <li><strong>A Community of Readers:</strong> We're building a space where book lovers can connect, share their passions, and discover new authors and titles.</li>
+            </ul>
+    
+            <h2>Join Our Community</h2>
+            <p>We invite you to explore our reviews, share your own thoughts in the comments, and become a part of the [Your Website Name] community. Follow us on social media [Link to your social media pages] to stay updated on our latest reviews and bookish discussions.</p>
+    
+            <p>Thank you for visiting! Happy reading!</p>
+    
+            <p>Sincerely,</p>
+            <p>The Team at ReviewNet</p>
+        </div>
+
+
+
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>ReviewNet</h3>
+                <p>Your journey through the universe of books starts here. Discover, review, and share your literary adventures.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('book') }}">Books</a></li>
+                    <li><a href="{{ url_for('cat') }}">Categories</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+                    <li><a href="{{ url_for('about') }}">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Categories</h3>
+                <ul>
+                    <li><a href="#">Fiction</a></li>
+                    <li><a href="#">Non-Fiction</a></li>
+                    <li><a href="#">Mystery</a></li>
+                    <li><a href="#">Science Fiction</a></li>
+                    <li><a href="#">Fantasy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-envelope"></i> info@ReviewNet.com</li>
+                    <li><i class="fas fa-phone"></i> +9/11 9211 412-6129</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Book Street, Reading City, India</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ReviewNet. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReviewNet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="/static/assets/favicon-32x32.png" alt="logo" id="logo-img">
+                <h1>ReviewNet</h1>
+            </div>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('book') }}">Books</a></li>
+                    <li><a href="{{ url_for('cat') }}">Categories</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+                    <li><a href="{{ url_for('about') }}">About Us</a></li>
+                </ul>
+            </div>
+             <div class="user-actions">
+                {% if session.loggedin %}
+                <div class="user-welcome">Welcome, {{ session.username }}!</div>
+                <a href="{{ url_for('logout') }}" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                {% else %}
+                <a href="{{ url_for('login') }}" class="login-btn">Login</a>
+                <a href="{{ url_for('register') }}" class="register-btn">Register</a>
+                {% endif %}
+            </div>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-slider">
+        <div class="slide active">
+            <div class="slide-content">
+                <h2>Discover New Worlds Through Reading</h2>
+                <p>Explore our curated collection of literary masterpieces and hidden gems</p>
+                <a href="{{ url_for('book') }}" class="btn">Explore Now</a>
+            </div>
+        </div>
+        <!--<div class="slide-indicators">
+            <span class="indicator active"></span>
+            <span class="indicator"></span>
+            <span class="indicator"></span>
+        </div>-->
+    </section>
+
+    <section id="featured" class="featured-books">
+        <h2 class="section-title">Featured Books</h2>
+
+        <div class="book-showcase">
+            <div class="book-card">
+                <div class="book-overlay"></div>
+                <div class="book-image">
+                    <img src="https://m.media-amazon.com/images/I/510KP0ZitnL._SL1400_.jpg" alt="Boy In Striped Pyjamas">
+                </div>
+                <div class="book-content">
+                    <h3>The Boy In Striped Pyjamas</h3>
+                    <p class="author">by John Boyne</p>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span>4.5/5</span>
+                    </div>
+                    <p class="description">A haunting tale of innocence during one of history's darkest periods. This poignant story follows two young boys on opposite sides of a concentration camp fence.</p>
+                    <a href="{{ url_for('rome') }}" class="btn">Read Review</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-showcase reverse">
+            <div class="book-card">
+                <div class="book-overlay"></div>
+                <div class="book-image">
+                    <img src="https://m.media-amazon.com/images/I/81xIPfJ6iUL._SL1500_.jpg" alt="The Hobbit">
+                </div>
+                <div class="book-content">
+                    <h3>The Hobbit</h3>
+                    <p class="author">by J.R.R. Tolkien</p>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span>5/5</span>
+                    </div>
+                    <p class="description">Follow the journey of Bilbo Baggins as he embarks on an unexpected adventure with a group of dwarves to reclaim their mountain home from a fearsome dragon.</p>
+                    <a href="book-details.html" class="btn">Read Review</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-showcase">
+            <div class="book-card">
+                <div class="book-overlay"></div>
+                <div class="book-image">
+                    <img src="https://m.media-amazon.com/images/I/818bGgNn0EL._SL1500_.jpg" alt="1984">
+                </div>
+                <div class="book-content">
+                    <h3>1984</h3>
+                    <p class="author">by George Orwell</p>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span>5/5</span>
+                    </div>
+                    <p class="description">A dystopian masterpiece that explores themes of totalitarianism, surveillance, and the power of language to shape thought and reality.</p>
+                    <a href="#" class="btn">Read Review</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="trending-section">
+        <h2 class="section-title">Trending Now</h2>
+        <div class="book-grid">
+            <div class="book-item">
+                <a href="{{ url_for('book') }}"><img src="https://m.media-amazon.com/images/I/81JJPDNlxSL._AC_UF1000,1000_QL80_.jpg" alt="Book cover"></a>
+                <h3>The Silent Patient</h3>
+                <p class="author">Alex Michaelides</p>
+                <div class="rating-small">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+            </div>
+            <div class="book-item">
+                <a href="{{ url_for('book') }}"><img src="https://m.media-amazon.com/images/I/81e+mSqZvnL.jpg" alt="Book cover"></a>
+                <h3>Where the Crawdads Sing</h3>
+                <p class="author">Delia Owens</p>
+                <div class="rating-small">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+            <div class="book-item">
+                <a href="{{ url_for('book') }}"><img src="https://m.media-amazon.com/images/I/71-4MkLN5jL._AC_UF1000,1000_QL80_.jpg" alt="Book cover"></a>
+                <h3>Educated</h3>
+                <p class="author">Tara Westover</p>
+                <div class="rating-small">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+            <div class="book-item">
+                <a href="{{ url_for('book') }}"><img src="https://m.media-amazon.com/images/I/81J6APjwxlL.jpg" alt="Book cover"></a>
+                <h3>The Midnight Library</h3>
+                <p class="author">Matt Haig</p>
+                <div class="rating-small">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+            </div>
+            <div class="book-item">
+
+                <a href="{{ url_for('book') }}"><img src="https://upload.wikimedia.org/wikipedia/en/b/ba/Killers_of_the_Flower_Moon_-_book_cover.jpg" alt="Book cover"></a>
+                <h3>Killers of the Flower Moon</h3>
+                <p class="author">David Grann</p>
+                <p class="author">Abhimanyu Raj(co-author)</p>
+                <div class="rating-small">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <div class="newsletter-container">
+            <h2>Stay Updated</h2>
+            <p>Subscribe to our newsletter for the latest book reviews and literary news</p>
+            <form>
+                <input type="email" placeholder="Your email address">
+                <button type="submit" class="btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>ReviewNet</h3>
+                <p>Your journey through the universe of books starts here. Discover, review, and share your literary adventures.</p>
+                <div class="social-links">
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('book') }}">Books</a></li>
+                    <li><a href="{{ url_for('cat') }}">Categories</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+                    <li><a href="{{ url_for('about') }}">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Categories</h3>
+                <ul>
+                    <li><a href="{{ url_for('cat') }}">Fiction</a></li>
+                    <li><a href="{{ url_for('cat') }}">Non-Fiction</a></li>
+                    <li><a href="{{ url_for('cat') }}">Mystery</a></li>
+                    <li><a href="{{ url_for('cat') }}">Science Fiction</a></li>
+                    <li><a href="{{ url_for('cat') }}">Fantasy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-envelope"></i> info@ReviewNet.com</li>
+                    <li><i class="fas fa-phone"></i> +9/11 9211 412-6129</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Book Street, Reading City, India</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ReviewNet. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

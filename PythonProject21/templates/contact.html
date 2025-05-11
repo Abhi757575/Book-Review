@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReviewNet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/style1.css">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="shortcut icon" href="/static/assets/favicon.ico" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="/static/assets/favicon-32x32.png" alt="logo" id="logo-img">
+                <h1>ReviewNet</h1>
+            </div>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('book') }}">Books</a></li>
+                    <li><a href="{{ url_for('cat') }}">Categories</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+                    <li><a href="{{ url_for('about') }}">About Us</a></li>
+                </ul>
+            </div>
+
+            <div class="user-actions">
+                {% if session.loggedin %}
+                <div class="user-welcome">Welcome, {{ session.username }}!</div>
+                <a href="{{ url_for('logout') }}" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                {% else %}
+                <a href="{{ url_for('login') }}" class="login-btn">Login</a>
+                <a href="{{ url_for('register') }}" class="register-btn">Register</a>
+                {% endif %}
+            </div>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <section class="contact-hero">
+        <h1>Get In Touch</h1>
+        <p>Have questions, suggestions, or want to join our team of reviewers? We'd love to hear from you!</p>
+        <section class="contact-container">
+            <div class="contact-form">
+                <h2>Send Us a Message</h2>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <select id="subject" name="subject">
+                            <option value="general">General Inquiry</option>
+                            <option value="support">Technical Support</option>
+                            <option value="Moderator">Become a Moderator</option>
+                            <option value="partnership">Partnership Opportunities</option>
+                            <option value="suggestion">Suggestion</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+            <div class="contact-info-main">
+                <h2>Contact Information</h2>
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="content">
+                        <h3>Our Location</h3>
+                        <p>123 Book Street, Reading City,<br>Literature District, 400031<br>India</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <div class="content">
+                        <h3>Phone Number</h3>
+                        <p>+91 9211 412-6129</p>
+                        <p>Mon-Fri, 9:00 AM - 6:00 PM</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <div class="content">
+                        <h3>Email Address</h3>
+                        <p>info@reviewnet.com</p>
+                        <p>support@reviewnet.com</p>
+                    </div>
+                </div>
+                <div class="social-contact">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <section class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <div class="faq-question">
+                    How can I submit a book for review?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Authors and publishers can submit books for review by filling out the contact form above and selecting "Partnership Opportunities." Please include details about your book including title, author, genre, publication date, and a brief synopsis. Our team will get back to you within 5-7 business days.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    How can I join ReviewNet as a reviewer?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    We're always looking for passionate readers to join our team! Fill out the contact form and select "Become a Reviewer." Please include information about your reading preferences, any writing experience, and why you want to join our team. Include a sample review (300-500 words) of a book you've recently read.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    How long does it take to get a response?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    We aim to respond to all inquiries within 48 hours during business days. For more complex requests or submissions, it may take up to a week. If you haven't heard back from us after a week, please check your spam folder or send a follow-up email.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Do you offer advertising opportunities on your website?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Yes, we offer various advertising options for publishers, authors, and book-related businesses. Please contact us through the form and select "Partnership Opportunities" to discuss advertising rates and placement options. We can create custom packages to suit different budgets and promotional needs.
+                </div>
+            </div>
+        </section>
+    </section>
+
+    
+
+
+
+    <section class="newsletter">
+        <div class="newsletter-container">
+            <h2>Stay Updated</h2>
+            <p>Subscribe to our newsletter for the latest book reviews and literary news</p>
+            <form>
+                <input type="email" placeholder="Your email address">
+                <button type="submit" class="btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>ReviewNet</h3>
+                <p>Your journey through the universe of books starts here. Discover, review, and share your literary adventures.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('book') }}">Books</a></li>
+                    <li><a href="{{ url_for('cat') }}">Categories</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+                    <li><a href="{{ url_for('about') }}">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Categories</h3>
+                <ul>
+                    <li><a href="#">Fiction</a></li>
+                    <li><a href="#">Non-Fiction</a></li>
+                    <li><a href="#">Mystery</a></li>
+                    <li><a href="#">Science Fiction</a></li>
+                    <li><a href="#">Fantasy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-envelope"></i> info@ReviewNet.com</li>
+                    <li><i class="fas fa-phone"></i> +9/11 9211 412-6129</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Book Street, Reading City, India</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ReviewNet. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="script1.js"></script>
+</body>
+</html>

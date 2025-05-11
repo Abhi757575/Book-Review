@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReviewNet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="/static/assets/favicon-32x32.png" alt="logo" id="logo-img">
+                <h1>ReviewNet</h1>
+            </div>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('book') }}">Books</a></li>
+                    <li><a href="{{ url_for('cat') }}">Categories</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+                    <li><a href="{{ url_for('about') }}">About Us</a></li>
+                </ul>
+            </div>
+            <div class="search-box">
+                <input type="text" placeholder="Search for books...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="user-actions">
+                {% if session.loggedin %}
+                <div class="user-welcome">Welcome, {{ session.username }}!</div>
+                <a href="{{ url_for('logout') }}" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                {% else %}
+                <a href="{{ url_for('login') }}" class="login-btn">Login</a>
+                <a href="{{ url_for('register') }}" class="register-btn">Register</a>
+                {% endif %}
+            </div>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </div>
+    </nav>
+    <section class="newsletter">
+        <div class="cat">
+            <h2>Fiction</h2>
+        <div class="book-grid">
+            <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/81dAjy4IfZL._SY522_.jpg" alt="Book cover">
+                <h3>The Silent Patient</h3>
+                <p class="author">Alex Michaelides</p>
+                <div class="rating-small">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+            </div>
+            <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/81dAjy4IfZL._SY522_.jpg" alt="Book cover">
+                <h3>Where the Crawdads Sing</h3>
+                <p class="author">Delia Owens</p>
+                <div class="rating-small">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+            <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/81dAjy4IfZL._SY522_.jpg" alt="Book cover">
+                <h3>Educated</h3>
+                <p class="author">Tara Westover</p>
+                <div class="rating-small">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+            <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/81dAjy4IfZL._SY522_.jpg" alt="Book cover">
+                <h3>The Midnight Library</h3>
+                <p class="author">Matt Haig</p>
+                <div class="rating-small">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+            </div>
+            <div class="btn">
+                <button><a href="book.html"> More</a></button>
+            </div>
+        </div>
+        </div>
+
+
+        <h2>Non-Fiction</h2>
+        <div class="book-grid">
+            <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/81dAjy4IfZL._SY522_.jpg" alt="Book cover">
+                <h3>The Silent Patient</h3>
+                <p class="author">Alex Michaelides</p>
+                <div class="rating-small">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+            </div>
+            <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/81dAjy4IfZL._SY522_.jpg" alt="Book cover">
+                <h3>Where the Crawdads Sing</h3>
+                <p class="author">Delia Owens</p>
+                <div class="rating-small">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+            <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/81dAjy4IfZL._SY522_.jpg" alt="Book cover">
+                <h3>Educated</h3>
+                <p class="author">Tara Westover</p>
+                <div class="rating-small">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+            <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/81dAjy4IfZL._SY522_.jpg" alt="Book cover">
+                <h3>The Midnight Library</h3>
+                <p class="author">Matt Haig</p>
+                <div class="rating-small">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+            </div>
+            <div class="btn">
+                <button><a href="book.html"> More</a></button>
+            </div>
+        </div>
+
+
+        <h2>Mystery</h2>
+        <div class="book-grid">
+            <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/81dAjy4IfZL._SY522_.jpg" alt="Book cover">
+                <h3>The Silent Patient</h3>
+                <p class="author">Alex Michaelides</p>
+                <div class="rating-small">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+            </div>
+            <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/81dAjy4IfZL._SY522_.jpg" alt="Book cover">
+                <h3>Where the Crawdads Sing</h3>
+                <p class="author">Delia Owens</p>
+                <div class="rating-small">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+            <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/81dAjy4IfZL._SY522_.jpg" alt="Book cover">
+                <h3>Educated</h3>
+                <p class="author">Tara Westover</p>
+                <div class="rating-small">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+            <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/81dAjy4IfZL._SY522_.jpg" alt="Book cover">
+                <h3>The Midnight Library</h3>
+                <p class="author">Matt Haig</p>
+                <div class="rating-small">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+            </div>
+            <div class="btn">
+                <button><a href="book.html"> More</a></button>
+            </div>
+        </div>
+
+
+        <h2>Science-Fiction</h2>
+        <div class="book-grid">
+            <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/81dAjy4IfZL._SY522_.jpg" alt="Book cover">
+                <h3>The Silent Patient</h3>
+                <p class="author">Alex Michaelides</p>
+                <div class="rating-small">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+            </div>
+            <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/81dAjy4IfZL._SY522_.jpg" alt="Book cover">
+                <h3>Where the Crawdads Sing</h3>
+                <p class="author">Delia Owens</p>
+                <div class="rating-small">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+            <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/81dAjy4IfZL._SY522_.jpg" alt="Book cover">
+                <h3>Educated</h3>
+                <p class="author">Tara Westover</p>
+                <div class="rating-small">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+            <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/81dAjy4IfZL._SY522_.jpg" alt="Book cover">
+                <h3>The Midnight Library</h3>
+                <p class="author">Matt Haig</p>
+                <div class="rating-small">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+            </div>
+            <div class="btn">
+                <button><a href="book.html"> More</a></button>
+            </div>
+        </div>
+
+
+        <h2>Fantasy</h2>
+        <div class="book-grid">
+            <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/81dAjy4IfZL._SY522_.jpg" alt="Book cover">
+                <h3>The Silent Patient</h3>
+                <p class="author">Alex Michaelides</p>
+                <div class="rating-small">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+            </div>
+            <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/81dAjy4IfZL._SY522_.jpg" alt="Book cover">
+                <h3>Where the Crawdads Sing</h3>
+                <p class="author">Delia Owens</p>
+                <div class="rating-small">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                
+            </div>
+            <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/81dAjy4IfZL._SY522_.jpg" alt="Book cover">
+                <h3>Educated</h3>
+                <p class="author">Tara Westover</p>
+                <div class="rating-small">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+            <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/81dAjy4IfZL._SY522_.jpg" alt="Book cover">
+                <h3>The Midnight Library</h3>
+                <p class="author">Matt Haig</p>
+                <div class="rating-small">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+            </div>
+            <div class="btn">
+                <button><a href="book.html"> More</a></button>
+            </div>
+        </div>
+
+        <h2>Smut</h2>
+        <div class="book-grid">
+            <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/81dAjy4IfZL._SY522_.jpg" alt="Book cover">
+                <h3>The Silent Patient</h3>
+                <p class="author">Alex Michaelides</p>
+                <div class="rating-small">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+            </div>
+            <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/81dAjy4IfZL._SY522_.jpg" alt="Book cover">
+                <h3>Where the Crawdads Sing</h3>
+                <p class="author">Delia Owens</p>
+                <div class="rating-small">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+            <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/81dAjy4IfZL._SY522_.jpg" alt="Book cover">
+                <h3>Educated</h3>
+                <p class="author">Tara Westover</p>
+                <div class="rating-small">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                
+            </div>
+            <div class="book-item">
+                <img src="https://m.media-amazon.com/images/I/81dAjy4IfZL._SY522_.jpg" alt="Book cover">
+                <h3>The Midnight Library</h3>
+                <p class="author">Matt Haig</p>
+                <div class="rating-small">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+            </div>
+            <div class="more-item">
+                <img src="/assets/collage.jpg" alt="more books" class="more-books">
+                <button class="image-button"><a href="book.html"> More</a></button></button>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        
+        <div class="newsletter-container">
+            <h2>Stay Updated</h2>
+            <p>Subscribe to our newsletter for the latest book reviews and literary news</p>
+            <form>
+                <input type="email" placeholder="Your email address">
+                <button type="submit" class="btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>ReviewNet</h3>
+                <p>Your journey through the universe of books starts here. Discover, review, and share your literary adventures.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('book') }}">Books</a></li>
+                    <li><a href="{{ url_for('cat') }}">Categories</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+                    <li><a href="{{ url_for('about') }}">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Categories</h3>
+                <ul>
+                    <li><a href="#">Fiction</a></li>
+                    <li><a href="#">Non-Fiction</a></li>
+                    <li><a href="#">Mystery</a></li>
+                    <li><a href="#">Science Fiction</a></li>
+                    <li><a href="#">Fantasy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-envelope"></i> info@ReviewNet.com</li>
+                    <li><i class="fas fa-phone"></i> +9/11 9211 412-6129</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Book Street, Reading City, India</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ReviewNet. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

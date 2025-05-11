@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReviewNet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/style1.css">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="/static/ero.css">
+    <link rel="shortcut icon" href="/static/assets/favicon.ico" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="/static/assets/favicon-32x32.png" alt="logo" id="logo-img">
+                <h1>ReviewNet</h1>
+            </div>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('book') }}">Books</a></li>
+                    <li><a href="{{ url_for('cat') }}">Categories</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+                    <li><a href="{{ url_for('about') }}">About Us</a></li>
+                </ul>
+            </div>
+            <div class="user-actions">
+                {% if session.loggedin %}
+                <div class="user-welcome">Welcome, {{ session.username }}!</div>
+                <a href="{{ url_for('logout') }}" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                {% else %}
+                <a href="{{ url_for('login') }}" class="login-btn">Login</a>
+                <a href="{{ url_for('register') }}" class="register-btn">Register</a>
+                {% endif %}
+            </div>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container main-content">
+        <!-- Book Details Section -->
+        <div class="book-showcase">
+            <div class="book-cover">
+                <img src="https://m.media-amazon.com/images/I/815xJbtOVfL._AC_UF1000,1000_QL80_.jpg" alt="Book Cover: The Midnight Library">
+            </div>
+
+            <div class="book-details">
+                <h2 class="book-title">Monster</h2>
+                <p class="book-author">By Naoki Urasawa</p>
+
+                <div class="book-metadata">
+                    <div class="metadata-item">
+                        Published: <span>1994</span>
+                    </div>
+                    <div class="metadata-item">
+                        Volumes: <span>18</span>
+                    </div>
+                    <div class="metadata-item">
+                        Rating: <span>4.5/5</span>
+                    </div>
+                </div>
+
+                <div class="book-tags">
+                    <span class="tag">Fiction</span>
+                    <span class="tag">Fantasy</span>
+                    <span class="tag">Philosophy</span>
+                    <span class="tag">Self-Discovery</span>
+                </div>
+
+                <div class="book-synopsis">
+                    <h3>Synopsis</h3>
+                    <p>What if saving a life set into motion a chain of events that could end countless others? In a quiet hospital in Germany, brilliant neurosurgeon Dr. Kenzo Tenma faces an impossible choice—one that changes his fate forever. He saves the life of a young boy over a city official, unknowingly unleashing a darkness the world has never seen.</p>
+
+                    <p>Years later, when people connected to Tenma begin dying under mysterious circumstances, he discovers the horrifying truth: the boy he once saved has grown into a calculating killer, a “monster” hiding behind a mask of innocence and charisma. Driven by guilt and a desire for redemption, Tenma embarks on a dangerous journey across Europe to stop the monster he helped create.</p>
+
+                    <p>But what defines a monster? Is it the one who kills without remorse—or the one who is willing to kill to stop him? As Tenma chases the truth, he meets a cast of unforgettable characters, each with their own pain, secrets, and morality tested by the monster’s shadow.</p>
+
+                    <p>In *Monster*, Naoki Urasawa crafts a masterful psychological thriller about the nature of evil, the weight of conscience, and the question of whether a single good deed can outweigh the chaos it brings. Gripping, intelligent, and haunting, it asks: if you had the chance to go back—would you still save him?</p>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Reviews & Comments Section -->
+        <section class="reviews-section">
+            <div class="section-header">
+                <h2>Reader Reviews</h2>
+                <p>Share your thoughts about this book</p>
+            </div>
+
+            <!-- Write Review Form -->
+            <div class="review-form-container">
+                {% if session.loggedin %}
+                <form method="POST" action="{{ url_for('rome') }}" class="review-form">
+                    <h3><i class="fas fa-feather-alt"></i> Write Your Review</h3>
+                    <textarea name="review_content" rows="4" placeholder="Share your thoughts about this book..." required></textarea>
+                    <button type="submit" name="new_review" class="primary-btn">Post Review</button>
+                </form>
+                {% else %}
+                <div class="auth-prompt">
+                    <i class="fas fa-lock"></i>
+                    <p>Want to share your thoughts? <a href="{{ url_for('login') }}">Log in</a> or <a href="{{ url_for('register') }}">Register</a> to join the conversation.</p>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Reviews List -->
+            <div class="reviews-list">
+                <h3>Community Reviews</h3>
+
+                {% if reviews %}
+                    {% for review in reviews %}
+                    <div class="review-card">
+                        <div class="review-card-header">
+                            <div class="reviewer-info">
+                                <img src="/api/placeholder/40/40" alt="User Avatar" class="avatar">
+                                <div class="reviewer-meta">
+                                    <span class="reviewer-name">{{ review.author }}</span>
+                                    <span class="review-date"><i class="far fa-clock"></i> Recently posted</span>
+                                </div>
+                            </div>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+
+                        <div class="review-card-body">
+                            <p>{{ review.content }}</p>
+                        </div>
+
+                        <div class="review-card-footer">
+                            <button class="action-btn comments-toggle" data-comment-count="{{ review.comments|length }}">
+                                <i class="far fa-comment"></i> Comments ({{ review.comments|length }})
+                            </button>
+                            <button class="action-btn like-btn">
+                                <i class="far fa-heart"></i> <span class="like-count">0</span>
+                            </button>
+                        </div>
+
+                        <!-- Comments Container -->
+                        <div class="comments-container">
+                            {% if review.comments %}
+                            <ul class="comments-list">
+                                {% for comment in review.comments %}
+                                <li class="comment-item">
+                                    <div class="comment-header">
+                                        <img src="/api/placeholder/30/30" alt="Commenter Avatar" class="comment-avatar">
+                                        <span class="commenter-name">{{ comment.username }}</span>
+                                    </div>
+                                    <div class="comment-body">
+                                        <p>{{ comment.content }}</p>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% else %}
+                            <p class="no-content-message">No comments yet. Be the first to comment!</p>
+                            {% endif %}
+
+                            <!-- Comment Form -->
+                            {% if session.loggedin %}
+                            <form method="POST" action="{{ url_for('rome') }}" class="comment-form">
+                                <input type="hidden" name="review_id" value="{{ review.id }}">
+                                <div class="comment-input-group">
+                                    <img src="/api/placeholder/30/30" alt="Your Avatar" class="comment-avatar">
+                                    <input type="text" name="comment_content" placeholder="Add a comment..." required>
+                                    <button type="submit" name="new_comment" class="comment-submit-btn">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </form>
+                            {% else %}
+                            <div class="comment-auth-prompt">
+                                <a href="{{ url_for('login') }}">Log in</a> to leave a comment
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                <div class="no-content-block">
+                    <i class="fas fa-book-open"></i>
+                    <p>No reviews yet. Be the first to share your thoughts about this book!</p>
+                </div>
+                {% endif %}
+            </div>
+        </section>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>ReviewNet</h3>
+                <p>Your journey through the universe of books starts here. Discover, review, and share your literary adventures.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Books</a></li>
+                    <li><a href="#">Categories</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Categories</h3>
+                <ul>
+                    <li><a href="#">Fiction</a></li>
+                    <li><a href="#">Non-Fiction</a></li>
+                    <li><a href="#">Mystery</a></li>
+                    <li><a href="#">Science Fiction</a></li>
+                    <li><a href="#">Fantasy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-envelope"></i> info@ReviewNet.com</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Book Street, Reading City</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ReviewNet. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle comments when clicking the comments button
+            const commentToggleButtons = document.querySelectorAll('.comments-toggle');
+            commentToggleButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const reviewCard = this.closest('.review-card');
+                    const commentsContainer = reviewCard.querySelector('.comments-container');
+
+                    // Toggle visibility with sliding animation class
+                    commentsContainer.classList.toggle('visible');
+
+                    // Update button text and icon
+                    const commentCount = this.getAttribute('data-comment-count');
+                    const icon = this.querySelector('i');
+
+                    if (commentsContainer.classList.contains('visible')) {
+                        this.innerHTML = `<i class="fas fa-comment"></i> Hide Comments`;
+                    } else {
+                        this.innerHTML = `<i class="far fa-comment"></i> Comments (${commentCount})`;
+                    }
+                });
+            });
+
+            // Like button functionality
+            const likeButtons = document.querySelectorAll('.like-btn');
+            likeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const icon = this.querySelector('i');
+                    const likeCount = this.querySelector('.like-count');
+
+                    if (icon.classList.contains('far')) {
+                        // Like action
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                        icon.classList.add('pulse-animation');
+                        likeCount.textContent = parseInt(likeCount.textContent) + 1;
+
+                        // Remove animation class after animation completes
+                        setTimeout(() => {
+                            icon.classList.remove('pulse-animation');
+                        }, 1000);
+                    } else {
+                        // Unlike action
+                        icon.classList.remove('fas');
+                        icon.classList.add('far');
+                        likeCount.textContent = parseInt(likeCount.textContent) - 1;
+                    }
+                });
+            });
+
+            // Mobile menu toggle
+            const burger = document.querySelector('.burger');
+            const nav = document.querySelector('.nav-links');
+
+            burger.addEventListener('click', () => {
+                nav.classList.toggle('nav-active');
+                burger.classList.toggle('toggle');
+            });
+        });
+    </script>
+
+    <script src="/static/script.js"></script>
+    <script src="/static/script1.js"></script>
+</body>
+</html>
